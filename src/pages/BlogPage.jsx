@@ -3,6 +3,7 @@ import { Calendar, Eye, Tag, ChevronLeft, Plus, Loader2, Youtube, BookOpen } fro
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { DragonDivider, DragonWatermark } from '../components/ui/DragonDivider'
+import { NinjargonText } from '../components/ui/NinjargonText'
 import { AuthModal } from '../components/auth/AuthModal'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -316,9 +317,12 @@ export function BlogPage() {
             <span className="font-cinzel text-xs tracking-widest font-semibold" style={{ color: 'var(--gold)', letterSpacing: '0.25em' }}>BLOG OFICIAL</span>
             <div className="h-px w-12" style={{ background: 'var(--gold)' }} />
           </div>
-          <h1 className="font-cinzel font-black text-3xl md:text-4xl mb-3" style={{ color: 'var(--gold-lt)' }}>
+          <h1 className="font-cinzel font-black text-3xl md:text-4xl mb-2" style={{ color: 'var(--gold-lt)' }}>
             NinjagoBrasil Blog
           </h1>
+          <div className="flex justify-center mb-3">
+            <NinjargonText word="BLOG" size={20} color="rgba(232,200,74,0.4)" title="BLOG em Ninjargon" />
+          </div>
           <p className="font-lora text-base mb-5" style={{ color: 'rgba(248,235,195,0.8)' }}>
             Notícias, reviews, tutoriais e muito mais por ReiBricks
           </p>

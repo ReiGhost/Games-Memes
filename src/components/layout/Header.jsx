@@ -4,6 +4,7 @@ import { LogIn, LogOut, User, Menu, X, Youtube } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { AuthModal } from '../auth/AuthModal'
 import { DragonHeadIcon } from '../ui/DragonDivider'
+import { NinjargonText } from '../ui/NinjargonText'
 
 const NAV = [
   { label: 'Blog',        path: '/'          },
@@ -62,8 +63,11 @@ export function Header() {
                 <div className="font-cinzel font-black text-xl tracking-wider" style={{ color: 'var(--gold-lt)', lineHeight: '1.1' }}>
                   Ninjago
                 </div>
-                <div className="font-cinzel font-semibold text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.7)', letterSpacing: '0.25em' }}>
-                  BRASIL
+                <div className="flex items-center gap-1.5">
+                  <div className="font-cinzel font-semibold text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.7)', letterSpacing: '0.25em' }}>
+                    BRASIL
+                  </div>
+                  <NinjargonText word="NB" size={10} color="rgba(232,200,74,0.45)" title="NinjagoBrasil em Ninjargon" />
                 </div>
               </div>
             </Link>

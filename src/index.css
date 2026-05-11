@@ -1,5 +1,5 @@
 /* ── Google Fonts ────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,9 +7,9 @@
 
 /* ── CSS Variables ───────────────────────────────────── */
 :root {
-  --bg:         #F5E6C8;
-  --surface:    #FDF6E8;
-  --surface-2:  #F9EDD2;
+  --bg:         #F7EFE0;
+  --surface:    #FDF8F0;
+  --surface-2:  #F3E8D0;
   --border:     #C9A227;
   --border-lt:  #E8D07A;
   --red:        #7A1515;
@@ -29,20 +29,15 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
 }
 
-/* ── Dragon Scale Background ─────────────────────────── */
+/* ── Paper background — smooth, no pattern ───────────── */
 .dragon-scales-bg {
   background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse at 50% 0%,   rgba(122,21,21,0.07) 40%, transparent 70%),
-    radial-gradient(ellipse at 100% 50%, rgba(122,21,21,0.05) 40%, transparent 70%),
-    radial-gradient(ellipse at 0%   50%, rgba(122,21,21,0.05) 40%, transparent 70%);
-  background-size: 40px 40px;
 }
 
 /* ── Scrollbar ───────────────────────────────────────── */
@@ -52,8 +47,9 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--red-mid); }
 
 /* ── Typography helpers ──────────────────────────────── */
-.font-cinzel { font-family: 'Cinzel', Georgia, serif; }
-.font-lora   { font-family: 'Lora', Georgia, serif; }
+.font-cinzel  { font-family: 'Cinzel', Georgia, serif; }
+.font-lora    { font-family: 'Inter', system-ui, sans-serif; }
+.font-rajdhani { font-family: 'Rajdhani', system-ui, sans-serif; }
 
 /* ── Gold border utility ─────────────────────────────── */
 .border-gold    { border-color: var(--border); }
@@ -125,7 +121,7 @@ body {
   border: 1px solid rgba(201,162,39,0.45);
   border-radius: 5px;
   color: var(--text);
-  font-family: 'Lora', serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -164,7 +160,7 @@ body {
 
 /* ── Prose (blog content) ────────────────────────────── */
 .prose-ninja {
-  font-family: 'Lora', serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: var(--text);
   line-height: 1.8;
 }
