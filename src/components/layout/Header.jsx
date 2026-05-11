@@ -59,11 +59,11 @@ export function Header() {
               >
                 <DragonHeadIcon size={26} />
               </div>
-              <div className="leading-none">
-                <div style={{ fontFamily: "Impact, 'Bebas Neue', 'Arial Narrow', sans-serif", fontSize: '1.55rem', color: 'var(--gold-lt)', letterSpacing: '0.06em', lineHeight: 1 }}>
+              <div className="leading-none" style={{ textAlign: 'center' }}>
+                <div style={{ fontFamily: "'Russo One', 'Arial Black', sans-serif", fontSize: '1.5rem', color: 'var(--gold-lt)', letterSpacing: '0.04em', lineHeight: 1 }}>
                   NINJAGO
                 </div>
-                <div style={{ fontFamily: "Impact, 'Bebas Neue', 'Arial Narrow', sans-serif", fontSize: '0.78rem', color: 'rgba(232,200,74,0.65)', letterSpacing: '0.38em' }}>
+                <div style={{ fontFamily: "'Russo One', 'Arial Black', sans-serif", fontSize: '0.65rem', color: 'rgba(232,200,74,0.65)', letterSpacing: '0.45em', marginLeft: '2px' }}>
                   BRASIL
                 </div>
               </div>

@@ -114,7 +114,7 @@ function PostCard({ post, onClick }) {
           ))}
         </div>
 
-        <h2 className="font-cinzel font-bold text-base mb-2 leading-snug" style={{ color: 'var(--text)' }}>
+        <h2 className="text-base mb-2 leading-snug" style={{ color: 'var(--text)', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
           {post.title}
         </h2>
         <p className="font-lora text-sm leading-relaxed mb-4" style={{ color: 'var(--text-m)', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
@@ -178,7 +178,7 @@ function PostDetail({ post, onBack }) {
         ))}
       </div>
 
-      <h1 className="font-cinzel font-black text-2xl md:text-3xl mb-4" style={{ color: 'var(--text)', lineHeight: 1.25 }}>
+      <h1 className="text-2xl md:text-3xl mb-4" style={{ color: 'var(--text)', lineHeight: 1.25, fontFamily: 'Inter, sans-serif', fontWeight: 800 }}>
         {post.title}
       </h1>
 

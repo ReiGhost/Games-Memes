@@ -128,7 +128,7 @@ function CommunityCard({ post, onVote, onClick }) {
             </span>
           </div>
 
-          <h2 className="font-cinzel font-bold text-sm md:text-base mb-2" style={{ color: 'var(--text)' }}>
+          <h2 className="font-bold text-sm md:text-base mb-2" style={{ color: 'var(--text)', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
             {post.title}
           </h2>
 
@@ -229,7 +229,7 @@ function PostDetail({ post: initialPost, onBack }) {
                   · {formatDistanceToNow(new Date(post.created_at), { locale: ptBR, addSuffix: true })}
                 </span>
               </div>
-              <h1 className="font-cinzel font-black text-xl mb-4" style={{ color: 'var(--text)' }}>{post.title}</h1>
+              <h1 className="text-xl mb-4" style={{ color: 'var(--text)', fontFamily: 'Inter, sans-serif', fontWeight: 800 }}>{post.title}</h1>
               {post.content && (
                 <p className="font-lora leading-relaxed" style={{ color: 'var(--text-m)' }}>{post.content}</p>
               )}
