@@ -60,10 +60,10 @@ export function Header() {
                 <DragonHeadIcon size={26} />
               </div>
               <div className="leading-none">
-                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 900, fontSize: '1.5rem', color: 'var(--gold-lt)', letterSpacing: '0.04em', lineHeight: 1 }}>
+                <div style={{ fontFamily: "Impact, 'Bebas Neue', 'Arial Narrow', sans-serif", fontSize: '1.55rem', color: 'var(--gold-lt)', letterSpacing: '0.06em', lineHeight: 1 }}>
                   NINJAGO
                 </div>
-                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 700, fontSize: '0.75rem', color: 'rgba(232,200,74,0.65)', letterSpacing: '0.35em' }}>
+                <div style={{ fontFamily: "Impact, 'Bebas Neue', 'Arial Narrow', sans-serif", fontSize: '0.78rem', color: 'rgba(232,200,74,0.65)', letterSpacing: '0.38em' }}>
                   BRASIL
                 </div>
               </div>

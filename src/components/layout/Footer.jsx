@@ -17,7 +17,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <DragonHeadIcon size={36} />
               <div>
-                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 900, fontSize: '1.6rem', color: 'var(--gold-lt)', letterSpacing: '0.04em', lineHeight: 1 }}>NINJAGOBRASIL</div>
+                <div style={{ fontFamily: "Impact, 'Bebas Neue', 'Arial Narrow', sans-serif", fontSize: '1.65rem', color: 'var(--gold-lt)', letterSpacing: '0.05em', lineHeight: 1 }}>NINJAGOBRASIL</div>
                 <div className="font-cinzel text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.5)', letterSpacing: '0.2em' }}>A DOJÔ DIGITAL</div>
               </div>
             </div>
