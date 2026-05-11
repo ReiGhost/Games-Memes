@@ -1,0 +1,231 @@
+/* ── Google Fonts ────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ───────────────────────────────────── */
+:root {
+  --bg:         #F5E6C8;
+  --surface:    #FDF6E8;
+  --surface-2:  #F9EDD2;
+  --border:     #C9A227;
+  --border-lt:  #E8D07A;
+  --red:        #7A1515;
+  --red-mid:    #9E2020;
+  --gold:       #C9A227;
+  --gold-lt:    #E8C84A;
+  --gold-dk:    #8A6D10;
+  --text:       #1E0D07;
+  --text-m:     #4A2015;
+  --text-lt:    #8B5A3C;
+}
+
+/* ── Base ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Lora', Georgia, serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Dragon Scale Background ─────────────────────────── */
+.dragon-scales-bg {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%,   rgba(122,21,21,0.07) 40%, transparent 70%),
+    radial-gradient(ellipse at 100% 50%, rgba(122,21,21,0.05) 40%, transparent 70%),
+    radial-gradient(ellipse at 0%   50%, rgba(122,21,21,0.05) 40%, transparent 70%);
+  background-size: 40px 40px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--surface-2); }
+::-webkit-scrollbar-thumb  { background: var(--red); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--red-mid); }
+
+/* ── Typography helpers ──────────────────────────────── */
+.font-cinzel { font-family: 'Cinzel', Georgia, serif; }
+.font-lora   { font-family: 'Lora', Georgia, serif; }
+
+/* ── Gold border utility ─────────────────────────────── */
+.border-gold    { border-color: var(--border); }
+.border-gold-lt { border-color: var(--border-lt); }
+
+/* ── Glassmorphism card ──────────────────────────────── */
+.card-ninja {
+  background: var(--surface);
+  border: 1px solid rgba(201,162,39,0.35);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(30,13,7,0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card-ninja:hover {
+  box-shadow: 0 6px 24px rgba(122,21,21,0.15);
+  transform: translateY(-2px);
+}
+
+/* ── Red gradient button ─────────────────────────────── */
+.btn-ninja {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-mid) 100%);
+  color: var(--gold-lt);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(201,162,39,0.4);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-ninja:hover {
+  background: linear-gradient(135deg, var(--red-mid) 0%, #C0392B 100%);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(201,162,39,0.3);
+}
+.btn-ninja:active { transform: scale(0.97); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover {
+  background: rgba(201,162,39,0.1);
+  color: var(--gold-lt);
+}
+
+/* ── Input ───────────────────────────────────────────── */
+.input-ninja {
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid rgba(201,162,39,0.45);
+  border-radius: 5px;
+  color: var(--text);
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-ninja:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,162,39,0.15);
+}
+.input-ninja::placeholder { color: var(--text-lt); }
+
+/* ── Tab ─────────────────────────────────────────────── */
+.tab-active {
+  color: var(--gold-lt);
+  border-bottom: 2px solid var(--gold);
+}
+.tab-inactive {
+  color: rgba(248,235,195,0.7);
+  border-bottom: 2px solid transparent;
+}
+.tab-inactive:hover {
+  color: rgba(248,235,195,0.95);
+  border-bottom-color: rgba(201,162,39,0.4);
+}
+
+/* ── Badge / Flair ───────────────────────────────────── */
+.flair {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid currentColor;
+}
+
+/* ── Prose (blog content) ────────────────────────────── */
+.prose-ninja {
+  font-family: 'Lora', serif;
+  color: var(--text);
+  line-height: 1.8;
+}
+.prose-ninja h1,
+.prose-ninja h2,
+.prose-ninja h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--red);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.prose-ninja h1 { font-size: 1.75rem; }
+.prose-ninja h2 { font-size: 1.35rem; border-bottom: 1px solid rgba(201,162,39,0.3); padding-bottom: 0.3em; }
+.prose-ninja h3 { font-size: 1.1rem; }
+.prose-ninja p  { margin: 1em 0; }
+.prose-ninja a  { color: var(--red-mid); text-decoration: underline; }
+.prose-ninja strong { color: var(--red); }
+.prose-ninja ul,
+.prose-ninja ol  { margin: 1em 0; padding-left: 1.5em; }
+.prose-ninja li  { margin: 0.4em 0; }
+.prose-ninja blockquote {
+  border-left: 3px solid var(--gold);
+  padding-left: 1em;
+  color: var(--text-m);
+  font-style: italic;
+  margin: 1.5em 0;
+}
+.prose-ninja code {
+  background: rgba(122,21,21,0.08);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+
+/* ── Animations ──────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+
+/* ── Modal ───────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,13,7,0.65);
+  backdrop-filter: blur(3px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
