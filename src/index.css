@@ -7,9 +7,9 @@
 
 /* ── CSS Variables ───────────────────────────────────── */
 :root {
-  --bg:         #F7EFE0;
-  --surface:    #FDF8F0;
-  --surface-2:  #F3E8D0;
+  --bg:         #F0E6D0;
+  --surface:    #FFFFFF;
+  --surface-2:  #F8F5EE;
   --border:     #C9A227;
   --border-lt:  #E8D07A;
   --red:        #7A1515;
@@ -47,9 +47,9 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--red-mid); }
 
 /* ── Typography helpers ──────────────────────────────── */
-.font-cinzel  { font-family: 'Cinzel', Georgia, serif; }
-.font-lora    { font-family: 'Inter', system-ui, sans-serif; }
-.font-rajdhani { font-family: 'Rajdhani', system-ui, sans-serif; }
+.font-cinzel   { font-family: 'Cinzel', Georgia, serif; }
+.font-lora     { font-family: 'Inter', system-ui, sans-serif; }
+.font-barlow   { font-family: 'Barlow Condensed', Impact, sans-serif; }
 
 /* ── Gold border utility ─────────────────────────────── */
 .border-gold    { border-color: var(--border); }

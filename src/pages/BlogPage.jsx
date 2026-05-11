@@ -151,7 +151,7 @@ function PostCard({ post, onClick }) {
 // ── Post detail view ────────────────────────────────────
 function PostDetail({ post, onBack }) {
   return (
-    <div className="max-w-3xl mx-auto animate-fade-in">
+    <div className="max-w-3xl mx-auto animate-fade-in" style={{ background: '#fff', borderRadius: 12, border: '1px solid rgba(201,162,39,0.2)', padding: '2rem', boxShadow: '0 2px 16px rgba(30,13,7,0.07)' }}>
       <button
         onClick={onBack}
         className="flex items-center gap-2 mb-6 font-cinzel text-sm font-semibold transition-colors hover:underline"
@@ -321,7 +321,7 @@ export function BlogPage() {
             NinjagoBrasil Blog
           </h1>
           <div className="flex justify-center mb-3">
-            <NinjargonText word="BLOG" size={20} color="rgba(232,200,74,0.4)" title="BLOG em Ninjargon" />
+            <NinjargonText word="BLOG" size={28} color="rgba(232,200,74,0.45)" title="BLOG em Ninjargon" />
           </div>
           <p className="font-lora text-base mb-5" style={{ color: 'rgba(248,235,195,0.8)' }}>
             Notícias, reviews, tutoriais e muito mais por ReiBricks

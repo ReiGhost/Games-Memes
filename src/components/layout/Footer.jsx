@@ -17,8 +17,8 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <DragonHeadIcon size={36} />
               <div>
-                <div className="font-cinzel font-black text-2xl" style={{ color: 'var(--gold-lt)' }}>NinjagoBrasil</div>
-                <div className="font-cinzel text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.55)', letterSpacing: '0.2em' }}>A DOJÔ DIGITAL</div>
+                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 900, fontSize: '1.6rem', color: 'var(--gold-lt)', letterSpacing: '0.04em', lineHeight: 1 }}>NINJAGOBRASIL</div>
+                <div className="font-cinzel text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.5)', letterSpacing: '0.2em' }}>A DOJÔ DIGITAL</div>
               </div>
             </div>
             <p className="font-lora text-sm leading-relaxed" style={{ color: 'rgba(248,235,195,0.65)' }}>
@@ -87,8 +87,8 @@ export function Footer() {
           <p className="font-lora text-xs" style={{ color: 'rgba(248,235,195,0.4)' }}>
             © {new Date().getFullYear()} NinjagoBrasil — Todos os direitos reservados
           </p>
-          <div className="flex items-center gap-2">
-            <NinjargonText word="NINJA GO" size={14} color="rgba(201,162,39,0.35)" title="NINJA GO em Ninjargon" />
+          <div className="flex flex-col items-end gap-1.5">
+            <NinjargonText word="NINJA GO" size={22} color="rgba(201,162,39,0.4)" title="NINJA GO em Ninjargon" />
             <p className="flex items-center gap-1.5 text-xs" style={{ color: 'rgba(248,235,195,0.4)', fontFamily: 'Inter, sans-serif' }}>
               Feito com <Heart size={12} style={{ color: 'var(--red-mid)' }} fill="currentColor" /> por ReiBricks
             </p>

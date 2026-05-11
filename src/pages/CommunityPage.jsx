@@ -489,7 +489,7 @@ export function CommunityPage() {
             >
               <div className="flex flex-col items-center gap-1">
               <span className="font-cinzel font-black text-lg" style={{ color: 'var(--gold-lt)' }}>Comunidade</span>
-              <NinjargonText word="DOJO" size={12} color="rgba(232,200,74,0.5)" title="DOJO em Ninjargon" />
+              <NinjargonText word="DOJO" size={18} color="rgba(232,200,74,0.55)" title="DOJO em Ninjargon" />
             </div>
             </div>
             <p className="font-lora text-sm leading-relaxed mb-4" style={{ color: 'var(--text-m)' }}>

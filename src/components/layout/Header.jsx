@@ -59,15 +59,12 @@ export function Header() {
               >
                 <DragonHeadIcon size={26} />
               </div>
-              <div className="leading-tight">
-                <div className="font-cinzel font-black text-xl tracking-wider" style={{ color: 'var(--gold-lt)', lineHeight: '1.1' }}>
-                  Ninjago
+              <div className="leading-none">
+                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 900, fontSize: '1.5rem', color: 'var(--gold-lt)', letterSpacing: '0.04em', lineHeight: 1 }}>
+                  NINJAGO
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="font-cinzel font-semibold text-xs tracking-widest" style={{ color: 'rgba(232,200,74,0.7)', letterSpacing: '0.25em' }}>
-                    BRASIL
-                  </div>
-                  <NinjargonText word="NB" size={10} color="rgba(232,200,74,0.45)" title="NinjagoBrasil em Ninjargon" />
+                <div style={{ fontFamily: "'Barlow Condensed', Impact, sans-serif", fontWeight: 700, fontSize: '0.75rem', color: 'rgba(232,200,74,0.65)', letterSpacing: '0.35em' }}>
+                  BRASIL
                 </div>
               </div>
             </Link>
