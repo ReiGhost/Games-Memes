@@ -1,55 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Calendar, Eye, Tag, ChevronLeft, Plus, Loader2, Youtube, BookOpen, Pen } from 'lucide-react'
+import { Calendar, Eye, Tag, Plus, Loader2, Youtube, BookOpen } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { DragonDivider, DragonWatermark } from '../components/ui/DragonDivider'
+import { UserBadge } from '../components/ui/UserBadge'
 import { AuthModal } from '../components/auth/AuthModal'
+import { MOCK_POSTS } from '../data/mockData'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import toast from 'react-hot-toast'
-
-// ── Mock data (shown while Supabase is not yet set up) ──
-const MOCK_POSTS = [
-  {
-    id: '1',
-    title: 'Bem-vindo ao NinjagoBrasil!',
-    slug: 'bem-vindo',
-    excerpt: 'A maior comunidade brasileira de Ninjago chegou. Conheça tudo que preparamos para vocês, ninjas!',
-    content: `# Bem-vindo ao NinjagoBrasil!\n\nOlá, ninjas! Sou o **ReiBricks** e é com muito orgulho que apresento o **NinjagoBrasil**.\n\n## O que você encontra aqui\n\n- **Blog**: Notícias, reviews de sets e tutoriais de MOC\n- **Comunidade**: Compartilhe suas criações e coleções\n- **Chat**: Converse em tempo real com outros ninjas\n\n## Canal no YouTube\n\nInscreva-se em [@rei_bricks](https://youtube.com/@rei_bricks) para mais conteúdo!\n\nNinja go! 🥷`,
-    cover_image: null,
-    tags: ['boas-vindas', 'notícia'],
-    published: true,
-    views: 128,
-    created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-    profiles: { username: 'ReiBricks', ninja_rank: 'Lendário' },
-  },
-  {
-    id: '2',
-    title: 'Review: LEGO Ninjago Dragons Rising',
-    slug: 'review-dragons-rising',
-    excerpt: 'A nova fase do Ninjago está incrível! Confira nossa análise completa dos sets da linha Dragons Rising.',
-    content: `# Review: LEGO Ninjago Dragons Rising\n\nA nova fase traz dragões incríveis e personagens revamped!\n\n## Destaques\n\n- Novos dragões elementais\n- Personagens redesenhados\n- Sets para todos os bolsos\n\n> "Um dos melhores arcos da história do Ninjago" — ReiBricks`,
-    cover_image: null,
-    tags: ['review', 'sets', 'dragons-rising'],
-    published: true,
-    views: 342,
-    created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
-    profiles: { username: 'ReiBricks', ninja_rank: 'Lendário' },
-  },
-  {
-    id: '3',
-    title: 'Como fazer um MOC de Ninjago: Guia para iniciantes',
-    slug: 'guia-moc-iniciantes',
-    excerpt: 'Aprenda a criar suas próprias criações personalizadas de Ninjago com este guia passo a passo.',
-    content: `# Como fazer um MOC de Ninjago\n\nMOC (My Own Creation) é quando você cria algo novo com seus blocos!\n\n## Passos básicos\n\n1. **Escolha um tema** — Vila ninja? Templo? Covil?\n2. **Planeje no papel** — Esboce antes de construir\n3. **Separe as peças** — Organize por cor e tipo\n4. **Construa!** — Comece pela base\n\n## Dicas do ReiBricks\n\n- Use SNOT (Studs Not on Top) para detalhes\n- Misture conjuntos para ter mais peças\n- Fotografe o processo`,
-    cover_image: null,
-    tags: ['tutorial', 'moc', 'iniciante'],
-    published: true,
-    views: 891,
-    created_at: new Date(Date.now() - 86400000 * 10).toISOString(),
-    profiles: { username: 'ReiBricks', ninja_rank: 'Lendário' },
-  },
-]
 
 // ── Flair color map ─────────────────────────────────────
 const TAG_COLORS = {
@@ -83,11 +43,12 @@ function renderMarkdown(md) {
 }
 
 // ── Post card ───────────────────────────────────────────
-function PostCard({ post, onClick }) {
+function PostCard({ post }) {
+  const navigate = useNavigate()
   return (
     <article
       className="card-ninja cursor-pointer"
-      onClick={() => onClick(post)}
+      onClick={() => navigate(`/blog/${post.slug}`)}
       style={{ overflow: 'hidden' }}
     >
       {/* Cover image placeholder */}
@@ -122,15 +83,10 @@ function PostCard({ post, onClick }) {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div
-              className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-cinzel font-bold"
-              style={{ background: 'var(--gold)', color: '#1E0D07' }}
-            >
+            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: 'var(--gold)', color: '#1E0D07', fontFamily: 'Inter, sans-serif' }}>
               {(post.profiles?.username || 'R')[0]}
             </div>
-            <span className="font-cinzel text-xs font-semibold" style={{ color: 'var(--red)' }}>
-              {post.profiles?.username || 'ReiBricks'}
-            </span>
+            <UserBadge username={post.profiles?.username || 'ReiBricks'} role={post.profiles?.role || 'admin'} size="sm" />
           </div>
           <div className="flex items-center gap-3" style={{ color: 'var(--text-lt)' }}>
             <span className="flex items-center gap-1 text-xs font-lora">
@@ -271,35 +227,27 @@ function CreatePost({ onDone }) {
 
 // ── Main page ───────────────────────────────────────────
 export function BlogPage() {
-  const { isAdmin, user }         = useAuth()
-  const [posts, setPosts]         = useState([])
-  const [loading, setLoading]     = useState(true)
-  const [selected, setSelected]   = useState(null)
-  const [creating, setCreating]   = useState(false)
-  const [authModal, setAuthModal] = useState(false)
+  const { isAdmin }           = useAuth()
+  const navigate              = useNavigate()
+  const [posts, setPosts]     = useState([])
+  const [loading, setLoading] = useState(true)
+  const [creating, setCreating] = useState(false)
 
-  useEffect(() => {
-    loadPosts()
-  }, [])
+  useEffect(() => { loadPosts() }, [])
 
   async function loadPosts() {
     setLoading(true)
     const { data, error } = await supabase
       .from('blog_posts')
-      .select('*, profiles(username, ninja_rank)')
+      .select('*, profiles(username, ninja_rank, role)')
       .eq('published', true)
       .order('created_at', { ascending: false })
 
-    if (error || !data?.length) {
-      setPosts(MOCK_POSTS)
-    } else {
-      setPosts(data)
-    }
+    setPosts(error || !data?.length ? MOCK_POSTS : data)
     setLoading(false)
   }
 
   if (creating) return <main className="max-w-6xl mx-auto px-4 py-8"><CreatePost onDone={() => { setCreating(false); loadPosts() }} /></main>
-  if (selected) return <main className="max-w-6xl mx-auto px-4 py-8"><PostDetail post={selected} onBack={() => setSelected(null)} /></main>
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
@@ -390,7 +338,7 @@ export function BlogPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map(post => (
-            <PostCard key={post.id} post={post} onClick={setSelected} />
+            <PostCard key={post.id} post={post} />
           ))}
         </div>
       )}

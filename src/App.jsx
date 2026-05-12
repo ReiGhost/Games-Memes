@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
-import { BlogPage }      from './pages/BlogPage'
-import { CommunityPage } from './pages/CommunityPage'
-import { ChatPage }      from './pages/ChatPage'
-import { AdminPage }     from './pages/AdminPage'
+import { BlogPage }           from './pages/BlogPage'
+import { BlogPostPage }        from './pages/BlogPostPage'
+import { CommunityPage }       from './pages/CommunityPage'
+import { CommunityPostPage }   from './pages/CommunityPostPage'
+import { ChatPage }            from './pages/ChatPage'
+import { AdminPage }           from './pages/AdminPage'
 import { useAuth }       from './contexts/AuthContext'
 import { Loader2 }       from 'lucide-react'
 
@@ -38,11 +40,13 @@ export default function App() {
 
       <div className="flex-1">
         <Routes>
-          <Route path="/"           element={<BlogPage />} />
-          <Route path="/comunidade" element={<CommunityPage />} />
-          <Route path="/chat"       element={<ChatPage />} />
-          <Route path="/admin"      element={<AdminPage />} />
-          <Route path="*"           element={<BlogPage />} />
+          <Route path="/"                      element={<BlogPage />} />
+          <Route path="/blog/:slug"            element={<BlogPostPage />} />
+          <Route path="/comunidade"            element={<CommunityPage />} />
+          <Route path="/comunidade/:postId"    element={<CommunityPostPage />} />
+          <Route path="/chat"                  element={<ChatPage />} />
+          <Route path="/admin"                 element={<AdminPage />} />
+          <Route path="*"                      element={<BlogPage />} />
         </Routes>
       </div>
 

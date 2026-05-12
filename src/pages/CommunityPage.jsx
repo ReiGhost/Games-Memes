@@ -1,12 +1,15 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ArrowUp, ArrowDown, MessageCircle, Plus, Flame, Clock, Award,
   ChevronLeft, Loader2, Send, Trash2, Pin, Shield,
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
+import { UserBadge } from '../components/ui/UserBadge'
 import { DragonDivider } from '../components/ui/DragonDivider'
 import { AuthModal } from '../components/auth/AuthModal'
+import { MOCK_COMMUNITY } from '../data/mockData'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import toast from 'react-hot-toast'
@@ -24,9 +27,9 @@ const FLAIR_STYLE = {
 }
 function flairStyle(f) { return FLAIR_STYLE[f] || FLAIR_STYLE['Geral'] }
 
-const MOCK_COMMUNITY = [
+const _REMOVED = [
   {
-    id: '1', title: 'Meu primeiro MOC de templo ninja!',
+    id: '1', title: 'moved to mockData.js',
     content: 'Finalmente terminei meu templo com 3 andares. Demorou 2 semanas mas ficou incrível! Usei peças do set 71767 e algumas extras.',
     flair: 'MOC', score: 47, comment_count: 12,
     created_at: new Date(Date.now() - 3600000 * 3).toISOString(),
@@ -60,11 +63,12 @@ const MOCK_COMMUNITY = [
 ]
 
 // ── Post card ───────────────────────────────────────────
-function CommunityCard({ post, onVote, onClick, onDelete, onPin }) {
-  const [score, setScore]     = useState(post.score || 0)
+function CommunityCard({ post, onVote, onDelete, onPin }) {
+  const [score, setScore]       = useState(post.score || 0)
   const [userVote, setUserVote] = useState(post.user_vote || 0)
-  const { user, isMod }       = useAuth()
+  const { user, isMod }         = useAuth()
   const [authModal, setAuthModal] = useState(false)
+  const navigate                = useNavigate()
 
   async function handleVote(val, e) {
     e.stopPropagation()
@@ -81,8 +85,8 @@ function CommunityCard({ post, onVote, onClick, onDelete, onPin }) {
   return (
     <>
       <article
-        className="card-ninja flex gap-0 cursor-pointer"
-        onClick={() => onClick(post)}
+        className="card-ninja flex gap-0 cursor-pointer group"
+        onClick={() => navigate(`/comunidade/${post.id}`)}
         style={{ overflow: 'hidden' }}
       >
         {/* Vote column */}
@@ -119,9 +123,7 @@ function CommunityCard({ post, onVote, onClick, onDelete, onPin }) {
             <span className="flair" style={{ background: fs.bg, color: fs.color, borderColor: fs.color + '55' }}>
               {post.flair}
             </span>
-            <span className="font-cinzel text-xs font-semibold" style={{ color: 'var(--red)' }}>
-              u/{post.profiles?.username}
-            </span>
+            <UserBadge username={`u/${post.profiles?.username}`} role={post.profiles?.role} size="sm" />
             <span className="font-lora text-xs" style={{ color: 'var(--text-lt)' }}>
               · {formatDistanceToNow(new Date(post.created_at), { locale: ptBR, addSuffix: true })}
             </span>
@@ -369,7 +371,6 @@ export function CommunityPage() {
   const [loading, setLoading]     = useState(true)
   const [sort, setSort]           = useState('hot')
   const [flair, setFlair]         = useState('Todos')
-  const [selected, setSelected]   = useState(null)
   const [creating, setCreating]   = useState(false)
   const [authModal, setAuthModal] = useState(false)
 
@@ -420,7 +421,6 @@ export function CommunityPage() {
   }
 
   if (creating) return <main className="max-w-6xl mx-auto px-4 py-8"><CreatePost onDone={() => { setCreating(false); loadPosts() }} /></main>
-  if (selected) return <main className="max-w-6xl mx-auto px-4 py-8"><PostDetail post={selected} onBack={() => setSelected(null)} /></main>
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
@@ -498,7 +498,7 @@ export function CommunityPage() {
           ) : (
             <div className="flex flex-col gap-3">
               {posts.map(post => (
-                <CommunityCard key={post.id} post={post} onVote={handleVote} onClick={setSelected} onDelete={handleDelete} onPin={handlePin} />
+                <CommunityCard key={post.id} post={post} onVote={handleVote} onDelete={handleDelete} onPin={handlePin} />
               ))}
             </div>
           )}
