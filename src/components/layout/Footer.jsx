@@ -1,6 +1,5 @@
 import { Youtube, Heart } from 'lucide-react'
 import { DragonDivider, DragonHeadIcon } from '../ui/DragonDivider'
-import { NinjargonText } from '../ui/NinjargonText'
 import { Link } from 'react-router-dom'
 
 export function Footer() {
@@ -87,12 +86,9 @@ export function Footer() {
           <p className="font-lora text-xs" style={{ color: 'rgba(248,235,195,0.4)' }}>
             © {new Date().getFullYear()} NinjagoBrasil — Todos os direitos reservados
           </p>
-          <div className="flex flex-col items-end gap-1.5">
-            <NinjargonText word="NINJA GO" size={22} color="rgba(201,162,39,0.4)" title="NINJA GO em Ninjargon" />
-            <p className="flex items-center gap-1.5 text-xs" style={{ color: 'rgba(248,235,195,0.4)', fontFamily: 'Inter, sans-serif' }}>
-              Feito com <Heart size={12} style={{ color: 'var(--red-mid)' }} fill="currentColor" /> por ReiBricks
-            </p>
-          </div>
+          <p className="flex items-center gap-1.5 text-xs" style={{ color: 'rgba(248,235,195,0.4)', fontFamily: 'Inter, sans-serif' }}>
+            Feito com <Heart size={12} style={{ color: 'var(--red-mid)' }} fill="currentColor" /> por ReiBricks
+          </p>
         </div>
       </div>
     </footer>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Calendar, Eye, Tag, ChevronLeft, Plus, Loader2, Youtube, BookOpen } from 'lucide-react'
+import { Calendar, Eye, Tag, ChevronLeft, Plus, Loader2, Youtube, BookOpen, Pen } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { DragonDivider, DragonWatermark } from '../components/ui/DragonDivider'
-import { NinjargonText } from '../components/ui/NinjargonText'
 import { AuthModal } from '../components/auth/AuthModal'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -307,35 +306,58 @@ export function BlogPage() {
 
       {/* Hero banner */}
       <section
-        className="relative rounded-2xl overflow-hidden mb-10 p-10 text-center"
-        style={{ background: 'linear-gradient(135deg, #4A0E0E 0%, #7A1515 50%, #9E2020 100%)', border: '1px solid var(--border)' }}
+        className="relative rounded-2xl overflow-hidden mb-10"
+        style={{ background: 'linear-gradient(135deg, #2E0707 0%, #5C1010 50%, #8B1A1A 100%)', border: '1px solid rgba(201,162,39,0.45)' }}
       >
-        <DragonWatermark className="absolute inset-0 w-full h-full opacity-50" />
-        <div className="relative z-10">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="h-px w-12" style={{ background: 'var(--gold)' }} />
-            <span className="font-cinzel text-xs tracking-widest font-semibold" style={{ color: 'var(--gold)', letterSpacing: '0.25em' }}>BLOG OFICIAL</span>
-            <div className="h-px w-12" style={{ background: 'var(--gold)' }} />
+        {/* Top gold line */}
+        <div style={{ height: '3px', background: 'linear-gradient(90deg, transparent 0%, #C9A227 50%, transparent 100%)' }} />
+
+        <div className="relative flex flex-col md:flex-row items-center gap-0">
+          {/* Left: text */}
+          <div className="flex-1 px-8 py-10">
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.3em', color: 'rgba(201,162,39,0.75)', marginBottom: '12px', textTransform: 'uppercase' }}>
+              Por ReiBricks
+            </p>
+            <h1 style={{ fontFamily: "'Russo One', 'Arial Black', sans-serif", fontSize: '2.8rem', color: '#F5DFA0', lineHeight: 0.95, letterSpacing: '0.01em', marginBottom: '16px' }}>
+              NINJAGO<br />
+              <span style={{ color: 'rgba(245,223,160,0.55)', fontSize: '1.8rem', letterSpacing: '0.18em' }}>BRASIL</span>
+            </h1>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem', color: 'rgba(248,235,195,0.65)', marginBottom: '28px', lineHeight: 1.6 }}>
+              Notícias, reviews, tutoriais<br />e muito mais sobre Ninjago
+            </p>
+            <a
+              href="https://youtube.com/@rei_bricks?si=nHoaOhxsrtK23Yvq"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                padding: '10px 20px',
+                background: 'rgba(201,162,39,0.15)',
+                border: '1px solid rgba(201,162,39,0.5)',
+                borderRadius: '8px',
+                color: 'var(--gold-lt)',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+              }}
+            >
+              <Youtube size={16} /> Assistir no YouTube
+            </a>
           </div>
-          <h1 className="font-cinzel font-black text-3xl md:text-4xl mb-2" style={{ color: 'var(--gold-lt)' }}>
-            NinjagoBrasil Blog
-          </h1>
-          <div className="flex justify-center mb-3">
-            <NinjargonText word="BLOG" size={28} color="rgba(232,200,74,0.45)" title="BLOG em Ninjargon" />
-          </div>
-          <p className="font-lora text-base mb-5" style={{ color: 'rgba(248,235,195,0.8)' }}>
-            Notícias, reviews, tutoriais e muito mais por ReiBricks
-          </p>
-          <a
-            href="https://youtube.com/@rei_bricks?si=nHoaOhxsrtK23Yvq"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost"
-            style={{ color: 'var(--gold-lt)', borderColor: 'rgba(232,200,74,0.5)' }}
+
+          {/* Right: decorative block */}
+          <div
+            className="hidden md:flex items-center justify-center w-64 self-stretch"
+            style={{ background: 'rgba(0,0,0,0.2)', borderLeft: '1px solid rgba(201,162,39,0.15)' }}
           >
-            <Youtube size={16} /> Assistir no YouTube
-          </a>
+            <DragonWatermark className="w-full h-full opacity-60" />
+          </div>
         </div>
+
+        {/* Bottom gold line */}
+        <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent 0%, #C9A227 50%, transparent 100%)' }} />
       </section>
 
       {/* Actions */}

@@ -6,7 +6,6 @@ import {
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { DragonDivider } from '../components/ui/DragonDivider'
-import { NinjargonText } from '../components/ui/NinjargonText'
 import { AuthModal } from '../components/auth/AuthModal'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -487,10 +486,7 @@ export function CommunityPage() {
               className="h-16 rounded-lg mb-4 flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg, #4A0E0E, #7A1515)' }}
             >
-              <div className="flex flex-col items-center gap-1">
-              <span className="font-cinzel font-black text-lg" style={{ color: 'var(--gold-lt)' }}>Comunidade</span>
-              <NinjargonText word="DOJO" size={18} color="rgba(232,200,74,0.55)" title="DOJO em Ninjargon" />
-            </div>
+              <span style={{ fontFamily: "'Russo One', 'Arial Black', sans-serif", fontSize: '1.2rem', color: 'var(--gold-lt)', letterSpacing: '0.04em' }}>COMUNIDADE</span>
             </div>
             <p className="font-lora text-sm leading-relaxed mb-4" style={{ color: 'var(--text-m)' }}>
               O espaço dos ninjas brasileiros! Compartilhe MOCs, coleções, dicas e muito mais.
