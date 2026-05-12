@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { LogIn, LogOut, User, Menu, X, Youtube } from 'lucide-react'
+import { LogIn, LogOut, User, Menu, X, Youtube, Shield } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { AuthModal } from '../auth/AuthModal'
 import { DragonHeadIcon } from '../ui/DragonDivider'
@@ -13,7 +13,7 @@ const NAV = [
 ]
 
 export function Header() {
-  const { user, profile, signOut } = useAuth()
+  const { user, profile, signOut, isAdmin, isMod } = useAuth()
   const [authModal, setAuthModal]  = useState(null)
   const [menuOpen, setMenuOpen]    = useState(false)
   const [userMenu, setUserMenu]    = useState(false)
@@ -115,10 +115,27 @@ export function Header() {
                         <p className="font-cinzel text-sm font-semibold" style={{ color: 'var(--red)' }}>{profile?.username}</p>
                         <p className="text-xs mt-0.5" style={{ color: 'var(--text-lt)' }}>{profile?.ninja_rank}</p>
                       </div>
+                      {isAdmin && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setUserMenu(false)}
+                          className="w-full flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-yellow-50"
+                          style={{ color: 'var(--gold-dk)', borderBottom: '1px solid rgba(201,162,39,0.15)' }}
+                        >
+                          <Shield size={15} /> Painel Admin
+                        </Link>
+                      )}
+                      {!isAdmin && isMod && (
+                        <div className="px-4 py-2">
+                          <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(26,74,138,0.1)', color: '#1A4A8A', fontFamily: 'Inter, sans-serif' }}>
+                            Moderador
+                          </span>
+                        </div>
+                      )}
                       <button
                         onClick={() => { signOut(); setUserMenu(false) }}
-                        className="w-full flex items-center gap-2 px-4 py-3 text-sm font-lora transition-colors hover:bg-red-50"
-                        style={{ color: 'var(--red)' }}
+                        className="w-full flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-red-50"
+                        style={{ color: 'var(--red)', fontFamily: 'Inter, sans-serif' }}
                       >
                         <LogOut size={15} /> Sair
                       </button>

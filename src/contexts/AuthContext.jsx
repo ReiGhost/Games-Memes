@@ -75,7 +75,9 @@ export function AuthProvider({ children }) {
     signIn,
     signOut,
     updateProfile,
-    isAdmin: profile?.is_admin ?? false,
+    role:    profile?.role ?? 'user',
+    isAdmin: profile?.role === 'admin',
+    isMod:   profile?.role === 'mod' || profile?.role === 'admin',
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

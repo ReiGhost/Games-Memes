@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   ArrowUp, ArrowDown, MessageCircle, Plus, Flame, Clock, Award,
-  ChevronLeft, Image, AlignLeft, Loader2, Send,
+  ChevronLeft, Loader2, Send, Trash2, Pin, Shield,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
@@ -60,10 +60,10 @@ const MOCK_COMMUNITY = [
 ]
 
 // ── Post card ───────────────────────────────────────────
-function CommunityCard({ post, onVote, onClick }) {
+function CommunityCard({ post, onVote, onClick, onDelete, onPin }) {
   const [score, setScore]     = useState(post.score || 0)
   const [userVote, setUserVote] = useState(post.user_vote || 0)
-  const { user }              = useAuth()
+  const { user, isMod }       = useAuth()
   const [authModal, setAuthModal] = useState(false)
 
   async function handleVote(val, e) {
@@ -146,10 +146,20 @@ function CommunityCard({ post, onVote, onClick }) {
             </p>
           )}
 
-          <div className="flex items-center gap-4" style={{ color: 'var(--text-lt)' }}>
-            <span className="flex items-center gap-1 text-xs font-lora">
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1 text-xs" style={{ color: 'var(--text-lt)' }}>
               <MessageCircle size={13} /> {post.comment_count} comentário{post.comment_count !== 1 ? 's' : ''}
             </span>
+            {isMod && (
+              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity" onClick={e => e.stopPropagation()}>
+                <button onClick={() => onPin(post)} className="p-1.5 rounded hover:bg-blue-50 transition-colors" title="Fixar post" style={{ color: post.pinned ? '#2563EB' : 'var(--text-lt)' }}>
+                  <Pin size={13} />
+                </button>
+                <button onClick={() => onDelete(post.id)} className="p-1.5 rounded hover:bg-red-50 transition-colors" title="Deletar post" style={{ color: 'var(--red)' }}>
+                  <Trash2 size={13} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </article>
@@ -394,6 +404,21 @@ export function CommunityPage() {
     await supabase.from('community_posts').update({ score: supabase.rpc('increment', { x: diff }) }).eq('id', postId)
   }
 
+  async function handleDelete(postId) {
+    if (!window.confirm('Deletar este post?')) return
+    const { error } = await supabase.from('community_posts').delete().eq('id', postId)
+    if (error) { toast.error(error.message); return }
+    toast.success('Post deletado')
+    setPosts(prev => prev.filter(p => p.id !== postId))
+  }
+
+  async function handlePin(post) {
+    const { error } = await supabase.from('community_posts').update({ pinned: !post.pinned }).eq('id', post.id)
+    if (error) { toast.error(error.message); return }
+    setPosts(prev => prev.map(p => p.id === post.id ? { ...p, pinned: !p.pinned } : p))
+    toast.success(post.pinned ? 'Post desfixado' : 'Post fixado!')
+  }
+
   if (creating) return <main className="max-w-6xl mx-auto px-4 py-8"><CreatePost onDone={() => { setCreating(false); loadPosts() }} /></main>
   if (selected) return <main className="max-w-6xl mx-auto px-4 py-8"><PostDetail post={selected} onBack={() => setSelected(null)} /></main>
 
@@ -473,7 +498,7 @@ export function CommunityPage() {
           ) : (
             <div className="flex flex-col gap-3">
               {posts.map(post => (
-                <CommunityCard key={post.id} post={post} onVote={handleVote} onClick={setSelected} />
+                <CommunityCard key={post.id} post={post} onVote={handleVote} onClick={setSelected} onDelete={handleDelete} onPin={handlePin} />
               ))}
             </div>
           )}
